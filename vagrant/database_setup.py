@@ -30,6 +30,18 @@ class MenuItem(Base):
         Integer, ForeignKey('restaurant.id'))
     restaurant = relationship(Restaurant)
 
+    #Property of this class has to be indented correctly. For our case, it is named "serialize".
+    @property
+    def serialize(self):
+        #Returns the object of JSON that can be read by humans easily.
+        return {
+            'Name': self.name,
+            'Price': self.price,
+            'ID': self.id,
+            'Description': self.description,
+            'Course': self.course,
+        }
+
 ##End of file##
 engine = create_engine(
     'sqlite:///restaurantmenu.db')

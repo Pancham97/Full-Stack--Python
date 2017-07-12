@@ -1,12 +1,24 @@
 <html>
     <head>
+        <link href="{{ url_for("static", filename="style.css")}}" rel="stylesheet">
         <title>
             {{ restaurant.name }}
         </title>
     </head>
 
     <body>
+
         <h1 style="color: #03c191;">{{ restaurant.name }}</h1>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                {% for message in messages %}
+                    <li><strong>{{ message }}</strong></li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
 
         <a href="{{url_for('newMenuItem', restaurant_id = restaurant.id)}}">Create a new menu item</a>
         {% for i in items %}
@@ -22,5 +34,7 @@
         </div>
 
         {% endfor %}
+
+
     </body>
 </html>
